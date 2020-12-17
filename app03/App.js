@@ -7,28 +7,34 @@ export default class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      pizza: 0
+      pizza: 0,
+      pizzas: [
+        {key:1, nome: 'Strogonoff', valor: 35.90},
+        {key:2, nome: 'Calabresa', valor: 59},
+        {key:3, nome: 'Quatro Queijos', valor: 37},
+        {key:4, nome: 'Brigadeiro', valor: 25.70},
+        {key:5, nome: 'Portuguesa', valor: 70},
+      ],
     };
   }
   render(){
+    let pizzasItem = this.state.pizzas.map((v, k ) => {
+      return <Picker.Item key={k} value={k} label={v.nome} />
+    });
   return (
     <View style={styles.container}>
       <Text style={styles.logo}> Menu Pizza</Text>
-      <Picker selectedValue={} onValueChange={}>
-        <Picker.Item key={1} value={1} label='Calabresa'/>
-        <Picker.Item key={2} value={2} label='Brigadeiro'/>
-        <Picker.Item key={3} value={3} label='Strogonoff'/>
+      <Picker selectedValue={this.state.pizza} 
+      onValueChange={(itemValue, itemIndex) => this.setState({pizza: itemValue})}>
+        {pizzasItem}
       </Picker>
-
-      <Text style={styles.pizza}>Você escolhe: Pizza Calabresa</Text>
-      <Text style={styles.pizza}>R$ 59,90</Text>
+      <Text style={styles.pizza}>Você escolheu: {this.state.pizzas[this.state.pizza].nome}</Text>
+      <Text style={styles.pizza}>R$ {this.state.pizzas[this.state.pizza].valor}</Text>
         
     </View>
   );
 }
 }
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -38,12 +44,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontsize: 28,
     fontWeight: 'bold', 
-
   }, 
   pizza: {
     marginTop: 15, 
     fontSize: 28, 
     textAlign: 'center', 
-
   }
 });
