@@ -29,7 +29,7 @@ export default class App extends Component {
         {pizzasItem}
       </Picker>
       <Text style={styles.pizza}>Você escolheu: {this.state.pizzas[this.state.pizza].nome}</Text>
-      <Text style={styles.pizza}>R$ {this.state.pizzas[this.state.pizza].valor}</Text>
+      <Text style={styles.pizza}>R$ {this.state.pizzas[this.state.pizza].valor.toFixed(2)}</Text>
         
     </View>
   );
