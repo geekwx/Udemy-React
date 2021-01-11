@@ -1,6 +1,7 @@
 
-import React from 'react';
+import React, { Component} from 'react';
 import { StyleSheet, Text, View, Switch } from 'react-native';
+
 
 class App extends Component {
   constructor(props){
