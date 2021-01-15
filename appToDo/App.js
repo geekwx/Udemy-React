@@ -1,10 +1,18 @@
 
-import React from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React, {useState} from 'react';
+import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import TaskList from './src/TaskList'
 
 import firebase from './src/firebaseConnection'
 
 export default function App() {
+  const [newTask, setNewTask] = useState('');
+  const [tasks, setTasks] = useState([
+    {key: '1', nome: 'Comprar pao'},
+    {key: '2', nome: 'Aprender React Native com firebase'},
+    {key: '3', nome: 'Seguir o sujeito'},
+  ]);
+
   return (
     <View style={styles.container}>
       <View style={styles.containerTask}>
@@ -12,14 +20,21 @@ export default function App() {
         style={styles.input}
         placeholder="o que vai fazer hoje?"
         underlineColorAndroid="transparent"
-        onChangeText={() => {}}
+        onChangeText={(texto) => {setNewTask(texto)}}
+        value={newTask}
         />
 
         <TouchableOpacity style={styles.buttonAdd}>
           <Text style={styles.buttonText}> + </Text>
         </TouchableOpacity>
       </View>
-
+        <FlatList 
+        data={tasks}
+        keyExtractor={item => item.key}
+        renderItem={ ({item}) => (
+          <TaskList data={item}  />
+        )}
+        />
      
     </View>
   );
